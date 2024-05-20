@@ -1,0 +1,19 @@
+server:
+  port: 8081
+  include-message: always
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_swalayan_dev
+    username: admin
+    password: zayndev
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  cache:
+    type: caffeine
+    caffeine:
+      spec: expireAfterWrite=300s
