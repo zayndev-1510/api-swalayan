@@ -1,5 +1,7 @@
 package com.api.swalayan.order;
 
+import com.api.swalayan.customer.Customer;
+import com.api.swalayan.produk.Produk;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,19 +20,18 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "customer")
-    private Integer customerId;
-    @Column(name = "product")
-    private Integer productId;
-    private Integer quantity;
-    private Double price;
+
+    @OneToOne
+    @JoinColumn(name = "customer")
+    private Customer customer;
+
     private Double total;
 
     @CreationTimestamp
     @Column(nullable = false,updatable = false)
     private Timestamp createdAt;
     @UpdateTimestamp
-    @Column(nullable = false,updatable = true)
+    @Column(nullable = false)
     private Timestamp updatedAt;
 
 }

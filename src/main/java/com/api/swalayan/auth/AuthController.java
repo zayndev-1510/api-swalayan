@@ -1,6 +1,8 @@
 package com.api.swalayan.auth;
 
+import com.api.swalayan.response.DataResponse;
 import com.api.swalayan.response.LoginResponse;
+import com.api.swalayan.response.RefreshTokenResponse;
 import com.api.swalayan.response.ResponseApi;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +29,9 @@ public class AuthController {
     @PostMapping(value = "sigin",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<LoginResponse> signIn(@Valid @RequestBody SignInRequest signInRequest) {
         return authService.login(signInRequest);
+    }
+    @PostMapping(value = "refresh-token",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<RefreshTokenResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return authService.refreshToken(refreshTokenRequest);
     }
 }

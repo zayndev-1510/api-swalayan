@@ -13,7 +13,7 @@ public class ProdukRequest {
     private String name;
     @NotBlank(message = "description product is empty")
     private String description;
-    private BigDecimal price;
+    private Double price;
     private Integer stock;
     private String image;
     private String qrcode;

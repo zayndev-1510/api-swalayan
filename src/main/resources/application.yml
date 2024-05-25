@@ -12,7 +12,6 @@ spring:
     username: admin
     password: zayndev
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   cache:
     type: caffeine
     caffeine:

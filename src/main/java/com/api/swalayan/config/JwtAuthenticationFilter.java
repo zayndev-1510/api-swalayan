@@ -46,7 +46,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter  {
             jwtToken = requestTokenHeader.substring(7);
             try {
                 username = jwtService.extractUsername(jwtToken);
-
             } catch (IllegalArgumentException e) {
                 handleUnauthorized(response,"Token Invalid");
                 return;
@@ -63,6 +62,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter  {
                 usernamePasswordAuthenticationToken
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            }else{
+
             }
         }
 
