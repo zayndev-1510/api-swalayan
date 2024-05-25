@@ -13,6 +13,11 @@ import java.util.Objects;
 public class UploadFile {
     @SneakyThrows
     public static String Upload(MultipartFile foto,String sub) {
+
+        if (foto == null || foto.isEmpty()) {
+            return null; //
+        }
+
         // Create directory if it doesn't exist
         String UPLOAD_FOLDER = "./uploads/"+sub;
         File uploadDir = new File(UPLOAD_FOLDER);

@@ -19,13 +19,23 @@ public class ProdukController {
     public ResponseEntity<DataResponse> getProduk(@PathVariable("a") Integer a, @PathVariable("b") Integer b) {
         return produkService.show(a,b);
     }
+
+    @GetMapping(value = "/{product}/{a}/{b}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DataResponse> filterProduct(@PathVariable("product") String product,@PathVariable("a") Integer a, @PathVariable("b") Integer b) {
+        return produkService.filterProduct(product,a,b);
+    }
+    @GetMapping(value = "{sort}/{keyword}/{a}/{b}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DataResponse> getProdukBySort(@PathVariable("sort") String sort,@PathVariable("keyword") String keyword,@PathVariable("a") Integer a, @PathVariable("b") Integer b) {
+        return produkService.sortProduct(sort,keyword,a,b);
+    }
+
    @PostMapping
     public ResponseEntity<ResponseApi> addProduk(@Valid @RequestParam("foto") MultipartFile foto,@ModelAttribute ProdukRequest produkRequest) {
         return produkService.create(produkRequest,foto);
     }
 
-    @PostMapping(value = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseApi> updateProduk(@PathVariable("id") Integer id, @RequestBody ProdukRequest  produkRequest,@RequestParam("file") MultipartFile file) {
+    @PostMapping("{id}")
+    public ResponseEntity<ResponseApi> updateProduk(@PathVariable("id") Integer id,@ModelAttribute ProdukRequest produkRequest,@RequestParam("foto") MultipartFile file) {
         return produkService.update(id,produkRequest,file);
     }
 

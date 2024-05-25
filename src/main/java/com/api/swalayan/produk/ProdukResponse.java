@@ -22,7 +22,7 @@ public class ProdukResponse {
     private String image;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private BigDecimal price;
+    private Double price;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer stock;

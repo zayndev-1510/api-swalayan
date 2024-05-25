@@ -16,8 +16,8 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "tbl_users")
 @Entity
+@Table(name = "tbl_users")
 @Data
 public class User implements UserDetails {
 

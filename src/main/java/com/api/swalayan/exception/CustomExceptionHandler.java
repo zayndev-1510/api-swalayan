@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
@@ -68,6 +70,15 @@ public class CustomExceptionHandler {
         return errormap;
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public Map<String, Object> handleInvalidMessageConversion(HttpMediaTypeNotSupportedException ex){
+        Map<String,Object> errormap=new HashMap<>();
+        errormap.put("time", String.valueOf(new Date()));
+        errormap.put("success",false);
+        errormap.put("message",ex.getMessage());
+        return errormap;
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Map<String, Object> handleInvalidRequestMethod(HttpRequestMethodNotSupportedException ex){
         Map<String,Object> errormap=new HashMap<>();
@@ -100,7 +111,19 @@ public class CustomExceptionHandler {
         Map<String,Object> errormap=new HashMap<>();
         errormap.put("time", String.valueOf(new Date()));
         errormap.put("status",HttpStatus.BAD_REQUEST);
-        errormap.put("error","Request Body Is Missing");
+        errormap.put("message","Request Body Is Missing");
+        errormap.put("success",false);
+        return errormap;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MissingServletRequestPartException.class)
+    public Map<String,Object> handleMissingServletRequestPartException(MissingServletRequestPartException ex) {
+        Map<String,Object> errormap=new HashMap<>();
+        errormap.put("time", String.valueOf(new Date()));
+        errormap.put("status",HttpStatus.BAD_REQUEST);
+        errormap.put("message",ex.getMessage());
+        errormap.put("success",false);
         return errormap;
     }
 }

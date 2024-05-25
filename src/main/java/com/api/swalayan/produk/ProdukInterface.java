@@ -13,4 +13,7 @@ public interface ProdukInterface {
     ResponseEntity<ResponseApi> create(ProdukRequest produkRequest, MultipartFile multipartFile);
     ResponseEntity<ResponseApi> update(int id, ProdukRequest produkRequest,MultipartFile multipartFile);
     ResponseEntity<ResponseApi> delete(int id);
+    ResponseEntity<DataResponse> filterProduct(String product,int pagenumber, int pagesize);
+    ResponseEntity<DataResponse> sortProduct(String sort,String keyword,int pagenumber, int pagesize);
+
 }

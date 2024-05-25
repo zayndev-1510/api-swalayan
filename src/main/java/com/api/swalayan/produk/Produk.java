@@ -22,7 +22,7 @@ public class Produk implements Serializable {
     @Column(nullable = false,length = 100)
     private String description;
     @Column(nullable = false)
-    private BigDecimal price;
+    private Double price;
     @Column(nullable = false)
     private Integer stock;
     @Column(nullable = false)
